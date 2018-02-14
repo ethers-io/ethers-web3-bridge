@@ -1,0 +1,21 @@
+{
+  "name": "ethers-web3-bridge",
+  "version": "0.0.1",
+  "description": "Enables Web3 instances to connect using an ethers.js Provider.",
+  "main": "index.js",
+  "dependencies": {
+    "ethers-providers": "^2.1.19",
+    "ethers-utils": "^2.1.11"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ethereum",
+    "web3",
+    "ethers",
+    "dapp"
+  ],
+  "author": "Richard Moore <me@ricmoo.com>",
+  "license": "MIT"
+}
