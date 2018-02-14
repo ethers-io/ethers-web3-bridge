@@ -44,6 +44,9 @@ var web3 = new Web3(provider);
 
 someLongRunningPromise().then(function(signer, provider) {
     providerBridge.connectEthers(provider, signer);
+
+    // Alternatively, if you want to connect to a standard Web3 provider anyways
+    // providerBridge.connectWeb3(someWeb3Provider);
 });
 ```
 
