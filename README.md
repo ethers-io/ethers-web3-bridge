@@ -29,7 +29,7 @@ var ProviderBridge = require('ethers-provider-bridge');
 var provider = ethers.provider.getDefaultProvider();
 var wallet = new ethers.Wallet(privateKey);
 
-var web3 = new Web3(new ProviderBridge(provider, signer));
+var web3 = new Web3(new ProviderBridge(provider, wallet));
 ```
 
 **Asynchronous**
