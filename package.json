@@ -1,6 +1,6 @@
 {
   "name": "ethers-web3-bridge",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Enables Web3 instances to connect using an ethers.js Provider.",
   "main": "index.js",
   "dependencies": {

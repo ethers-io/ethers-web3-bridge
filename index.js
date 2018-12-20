@@ -351,8 +351,8 @@ utils.defineProperty(ProviderBridge.prototype, '_sendAsync', function(payload, c
                     respondError('invalid from address', Errors.InvalidParams);
                     return;
                 }
-
-                signer.signMessage(params[0]).then(function(signature) {
+                const message = utils.arrayify(params[0]);
+                signer.signMessage(message).then(function(signature) {
                     respond(signature);
                 }, function(error) {
                     respondError('eth_sign error', Errors.InternalError);
@@ -368,6 +368,9 @@ utils.defineProperty(ProviderBridge.prototype, '_sendAsync', function(payload, c
                 if (utils.getAddress(params[0].from) !== address) {
                     respondError('invalid from address', Errors.InvalidParams);
                 }
+                params[0].gasLimit = params[0].gas;
+                delete params[0].from;
+                delete params[0].gas;
                 return signer.sendTransaction(params[0])
             }, function(error) {
                 respondError('eth_sendTransaction error', Errors.InternalError);
@@ -384,7 +387,6 @@ utils.defineProperty(ProviderBridge.prototype, '_sendAsync', function(payload, c
         case 'eth_syncing':
         case 'net_listening':
         case 'net_peerCount':
-        case 'net_version':
         case 'eth_protocolVersion':
             setTimeout(function() {
                 respond(self.send(payload).result);
@@ -392,6 +394,12 @@ utils.defineProperty(ProviderBridge.prototype, '_sendAsync', function(payload, c
             break;
 
         // Blockchain state
+
+        case 'net_version':
+            provider.getNetwork().then(function(network) {
+                respond(smallHexlify(network.chainId));
+            });
+            break;
 
         case 'eth_blockNumber':
             provider.getBlockNumber().then(function(blockNumber) {
